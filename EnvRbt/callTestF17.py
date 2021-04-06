@@ -113,13 +113,20 @@ class MyForm(QMainWindow):
 			self.tabs[self.tabQuant].setLayout(self.layout[self.tabQuant])
 		
 			#print self.ui.tabWidget.count()
-		
-			self.connect(self.pushButtonAddVaga[self.tabQuant], SIGNAL("clicked()"), self.cropImage)
-			self.connect(self.pushButtonRmVaga[self.tabQuant], SIGNAL("clicked()"), self.removeImage)
-			self.connect(self.pushButtonRstVaga[self.tabQuant], SIGNAL("clicked()"), self.resetImage)
-			self.connect(self.pushButtonSaveVaga[self.tabQuant], SIGNAL("clicked()"), self.saveImage)
-			self.connect(self.pushButtonStart[self.tabQuant], SIGNAL("clicked()"), self.start)
-			self.connect(self.pushButtonPause[self.tabQuant], SIGNAL("clicked()"), self.pause)
+
+			self.pushButtonAddVaga[self.tabQuant].clicked.connect(self.cropImage)
+			self.pushButtonRmVaga[self.tabQuant].clicked.connect(self.removeImage)
+			self.pushButtonRstVaga[self.tabQuant].clicked.connect(self.resetImage)
+			self.pushButtonSaveVaga[self.tabQuant].clicked.connect(self.saveImage)
+			self.pushButtonStart[self.tabQuant].clicked.connect(self.start)
+			self.pushButtonPause[self.tabQuant].clicked.connect(self.pause)
+
+			# self.connect(self.pushButtonAddVaga[self.tabQuant], SIGNAL("clicked()"), self.cropImage)
+			# self.connect(self.pushButtonRmVaga[self.tabQuant], SIGNAL("clicked()"), self.removeImage)
+			# self.connect(self.pushButtonRstVaga[self.tabQuant], SIGNAL("clicked()"), self.resetImage)
+			# self.connect(self.pushButtonSaveVaga[self.tabQuant], SIGNAL("clicked()"), self.saveImage)
+			# self.connect(self.pushButtonStart[self.tabQuant], SIGNAL("clicked()"), self.start)
+			# self.connect(self.pushButtonPause[self.tabQuant], SIGNAL("clicked()"), self.pause)
 			self.listWidgetEstadoVagas[self.tabQuant].itemClicked.connect(self.changeSlotColor)
 			self.ui.tabWidget.tabCloseRequested.connect(self.removeCurrentTab)
 		
@@ -136,6 +143,13 @@ class MyForm(QMainWindow):
 			ret, frame = self.cvVideo[self.tabQuant].read()
 			
 			self.cvImage.append(frame)
+
+			print('SELF CVIMAGE', self.cvVideo)
+
+			if(self.cvImage[self.tabQuant] == None):
+				print("self.cvImage[self.tabQuant]", self.cvImage[self.tabQuant])
+				
+				return
 			
 			height, width, byteValue = self.cvImage[self.tabQuant].shape
 			byteValue = byteValue * width
