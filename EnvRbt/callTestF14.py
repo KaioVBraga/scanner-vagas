@@ -5,8 +5,10 @@ import pickle
 import numpy as np
 from matplotlib import pyplot as plt
 import cv2
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+
 from demoTest3 import *
 
 class MyForm(QMainWindow):
@@ -100,7 +102,7 @@ class MyForm(QMainWindow):
 			self.ui.tabWidget.setTabText(self.tabQuant,"Camera %d" % (self.tabQuant+1))
 			self.tabs[self.tabQuant].setLayout(self.layout[self.tabQuant])
 		
-			print self.ui.tabWidget.count();
+			print(self.ui.tabWidget.count());
 		
 			self.connect(self.pushButtonAddVaga[self.tabQuant], SIGNAL("clicked()"), self.cropImage);
 			self.connect(self.pushButtonRmVaga[self.tabQuant], SIGNAL("clicked()"), self.removeImage);
@@ -161,10 +163,10 @@ class MyForm(QMainWindow):
 						
 						self.cvHist[self.tabQuant].append(cv2.calcHist([self.cvRoi[self.tabQuant][pos]], [0], None, [256], [0, 256]))
 						
-						print "\nCOMPARACAO DA VAGA %d do ESTACIONAMENTO %d" % (pos+1, self.tabQuant+1)
-						print cv2.compareHist(self.cvHist[self.tabQuant][pos], self.uniHist[0], cv2.HISTCMP_CORREL)
-						print cv2.compareHist(self.cvHist[self.tabQuant][pos], self.uniHist[1], cv2.HISTCMP_CORREL)
-						print cv2.compareHist(self.cvHist[self.tabQuant][pos], self.uniHist[0], cv2.HISTCMP_CORREL) * cv2.compareHist(self.cvHist[self.tabQuant][pos], self.uniHist[1], cv2.HISTCMP_CORREL)
+						# print "\nCOMPARACAO DA VAGA %d do ESTACIONAMENTO %d" % (pos+1, self.tabQuant+1)
+						# print cv2.compareHist(self.cvHist[self.tabQuant][pos], self.uniHist[0], cv2.HISTCMP_CORREL)
+						# print cv2.compareHist(self.cvHist[self.tabQuant][pos], self.uniHist[1], cv2.HISTCMP_CORREL)
+						# print cv2.compareHist(self.cvHist[self.tabQuant][pos], self.uniHist[0], cv2.HISTCMP_CORREL) * cv2.compareHist(self.cvHist[self.tabQuant][pos], self.uniHist[1], cv2.HISTCMP_CORREL)
 		
 						
 					height, width, byteValue = self.cvImage[self.tabQuant].shape;
@@ -235,10 +237,10 @@ class MyForm(QMainWindow):
 					
 					self.cvHist[crntTab].append(cv2.calcHist([self.cvRoi[crntTab][lastpos]], [0], None, [256], [0, 256]))
 					
-					print "\nCOMPARACAO DA VAGA %d do ESTACIONAMENTO %d" % (lastpos+1, crntTab+1)
-					print cv2.compareHist(self.cvHist[crntTab][lastpos], self.uniHist[0], cv2.HISTCMP_CORREL)
-					print cv2.compareHist(self.cvHist[crntTab][lastpos], self.uniHist[1], cv2.HISTCMP_CORREL)
-					print cv2.compareHist(self.cvHist[crntTab][lastpos], self.uniHist[0], cv2.HISTCMP_CORREL) * cv2.compareHist(self.cvHist[crntTab][lastpos], self.uniHist[1], cv2.HISTCMP_CORREL)
+					# print "\nCOMPARACAO DA VAGA %d do ESTACIONAMENTO %d" % (lastpos+1, crntTab+1)
+					# print cv2.compareHist(self.cvHist[crntTab][lastpos], self.uniHist[0], cv2.HISTCMP_CORREL)
+					# print cv2.compareHist(self.cvHist[crntTab][lastpos], self.uniHist[1], cv2.HISTCMP_CORREL)
+					# print cv2.compareHist(self.cvHist[crntTab][lastpos], self.uniHist[0], cv2.HISTCMP_CORREL) * cv2.compareHist(self.cvHist[crntTab][lastpos], self.uniHist[1], cv2.HISTCMP_CORREL)
 					
 					if cv2.compareHist(self.cvHist[crntTab][lastpos], self.uniHist[0], cv2.HISTCMP_CORREL) * cv2.compareHist(self.cvHist[crntTab][lastpos], self.uniHist[1], cv2.HISTCMP_CORREL) > 0.80:
 						self.listWidgetEstadoVagas[crntTab].item(lastpos).setText("Vaga "+ str(lastpos+1)+" Ocupada");
@@ -335,7 +337,7 @@ class MyForm(QMainWindow):
 	
 	def showImage(self, percent=None):
 		crntTab = self.ui.tabWidget.currentIndex();
-		print "Current tab is %d" % crntTab
+		# print "Current tab is %d" % crntTab
 		
 		self.factor[crntTab] = 1;
 		if(self.mQImage[crntTab].width()>1000):
@@ -426,8 +428,8 @@ class MyForm(QMainWindow):
 		return roi;
 	
 	def removeCurrentTab(self, currentIndex):
-		print "Length of self.vagas == %d" % len(self.vagas);
-		print "Current Index is %d" % currentIndex;
+		# print "Length of self.vagas == %d" % len(self.vagas);
+		# print "Current Index is %d" % currentIndex;
 		
 		for i in range(0, len(self.cvRoi[currentIndex])):
 			cvRoiName = self.fname[currentIndex].split('/');
@@ -460,7 +462,7 @@ class MyForm(QMainWindow):
 		
 		self.ui.tabWidget.removeTab(currentIndex);
 		
-		print "\nNEW Length of self.vagas == %d\n\n" % len(self.vagas);
+		# print "\nNEW Length of self.vagas == %d\n\n" % len(self.vagas);
 	
 	def closeEvent(self, QCloseEvent):
 		for currentIndex in range(len(self.cvRoi)):

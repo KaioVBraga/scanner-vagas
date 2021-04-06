@@ -11,6 +11,7 @@ from matplotlib import pyplot as plt
 import cv2
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
+# from PyQt5.QtWidgets import *
 from demoTest3 import *
 
 #Myform e a classe/GUI principal, e nela que sera exibido as Tabs e que possuira uma barra de menu 
@@ -122,7 +123,7 @@ class MyForm(QMainWindow):
 			self.ui.tabWidget.setTabText(self.tabQuant,"Camera %d" % (self.tabQuant+1))
 			self.tabs[self.tabQuant].setLayout(self.layout[self.tabQuant])
 		
-			print self.ui.tabWidget.count()
+			print(self.ui.tabWidget.count())
 			
 			#Conectando os slots e signals de cada tab
 			self.connect(self.pushButtonAddVaga[self.tabQuant], SIGNAL("clicked()"), self.cropImage)
