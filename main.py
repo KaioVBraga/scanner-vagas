@@ -18,8 +18,8 @@ class MyForm(QMainWindow):
 		
 		self.uniImg = []
 		self.uniHist = []
-		self.uniImg.append(cv2.imread("uniEstLivre0.png"))
-		self.uniImg.append(cv2.imread("uniEstLivre1.png"))
+		self.uniImg.append(cv2.imread("assets/baseCompare/uniEstLivre0.png"))
+		self.uniImg.append(cv2.imread("assets/baseCompare/uniEstLivre1.png"))
 		self.uniHist.append(cv2.calcHist([self.uniImg[0]], [0], None, [256], [0, 256]))
 		self.uniHist.append(cv2.calcHist([self.uniImg[1]], [0], None, [256], [0, 256]))
 		
