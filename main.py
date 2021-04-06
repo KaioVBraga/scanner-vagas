@@ -236,7 +236,7 @@ class MyForm(QMainWindow):
 		
 		if(0<=xp<=xs and 0<=yp<=ys and self.cropping[crntTab]==True):
 			xp = int(xp / self.factor[crntTab])
-			yp = int(yp / self.factor[crntTab])
+			yp = int(yp / self.factor[crntTab]) - 100
 			lastpos = len(self.vagas[crntTab])-1
 			
 			if(len(self.vagas[crntTab][lastpos])==0):
