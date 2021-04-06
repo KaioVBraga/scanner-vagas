@@ -10,4 +10,6 @@ REPOSITÓRIO EM DESENVOLVIMENTO
  - Numpy
  - MatplotLib
 
+Também é importante ressaltar que os vídeos de estacionamento não se encontram neste repositório, por conta de armazenamento.
+
 `python3 main.py`
