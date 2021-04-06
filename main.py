@@ -59,7 +59,7 @@ class MyForm(QMainWindow):
 		self.show()
 		
 	def fileOpen(self):
-		newName = str(QFileDialog.getOpenFileName(self, "Open file"))
+		newName,_ = QFileDialog.getOpenFileName(self, "Open file")
 		
 		if not(newName in self.fname) and ('.' in newName):
 			self.fname.append(newName)	
@@ -153,10 +153,10 @@ class MyForm(QMainWindow):
 
 			print('SELF CVIMAGE', self.cvVideo)
 
-			if(self.cvImage[self.tabQuant] == None):
-				print("self.cvImage[self.tabQuant]", self.cvImage[self.tabQuant])
+			# if(self.cvImage[self.tabQuant] == None):
+			# 	print("self.cvImage[self.tabQuant]", self.cvImage[self.tabQuant])
 				
-				return
+			# 	return
 			
 			height, width, byteValue = self.cvImage[self.tabQuant].shape
 			byteValue = byteValue * width
